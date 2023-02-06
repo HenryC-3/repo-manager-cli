@@ -1,9 +1,78 @@
-## Features
+> NOTICE: This Project is under development, and functionalities have been tested on MacOS only.
 
-1. auto commit in super project when running `git commit -m msg` in the submodule.
-2. stop commit when entering `ROOT_SUPER_PROJECT`
+## Table of Content
 
-## Issues
+-   [Table of Content](#table-of-content)
+-   [Overview](#overview)
+-   [Installation](#installation)
+-   [Usage](#usage)
+-   [Uninstall](#uninstall)
+-   [Setup Script Only](#setup-script-only)
+-   [Development](#development)
 
-1.  hard to ship ESM bundle, see [How to fix "Dynamic require of "os" is not supported" · Issue #1921 · evanw/esbuild](https://github.com/evanw/esbuild/issues/1921)
-2.  can't use top level `await`, due to the previous issue
+## Overview
+
+This project ships 2 things
+
+-   a script used in `post-commit` hook
+-   a CLI command used to control script behavior
+
+By using this script, you can
+
+-   commit and push in super-project automatically after running `git commit -m msg` in it's submodule
+-   stop auto commit in super-project when the path matches `$ROOT_SUPER_PROJECT`
+
+If you want to use the script without CLI, you can follow the [setup-script-only](#setup-script-only) guide.
+
+## Installation
+
+```bash
+npm install -g repo-steward
+```
+
+This step installs the `rp` command, and sets up script in `post-commit` hook.
+
+## Usage
+
+```bash
+Usage: rp [options] [command]
+
+Options:
+  -V, --version          output the version number
+  -h, --help             display help for command
+
+Commands:
+  init                   initialize cache files and post-commit hook
+  auto-update [options]  disable or enable auto update
+  help [command]         display help for command
+```
+
+## Uninstall
+
+```bash
+rp auto-update --disable
+npm uninstall repo-steward
+```
+
+## Setup Script Only
+
+1.  Download [auto-update script](https://github.com/HenryC-3/repo-manager-cli/releases/download/0.0.1/auto-update-script)
+2.  Run `chmod +x` for this script
+3.  Add the path to the script in your global `post-commit` file. For how to setup git hooks globally, checkout [this answer](https://stackoverflow.com/a/37293198/10915537).
+
+    ```bash
+    #!/bin/sh
+
+    path-to-the-downloaded-script/auto-update-script
+    ```
+
+Now, try to commit in a submodule and see what's happened in it's super-project!
+
+## Development
+
+> This is my very first CLI application, any advices and PRs are welcome!
+
+```bash
+pnpm i
+npm run watch
+```

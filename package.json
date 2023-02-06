@@ -1,5 +1,5 @@
 {
-    "name": "repo-manager",
+    "name": "repo-steward",
     "description": "1. auto commit in super project when running `git commit -m msg` in the submodule. 2. stop commit when entering `ROOT_SUPER_PROJECT`",
     "repository": {
         "type": "git",
@@ -21,7 +21,12 @@
     "main": "output/cli/index.cjs",
     "author": "HarryHe <henryhe0074@foxmail.com>",
     "scripts": {
-        "build": "node esbuild.config.cjs"
+        "watch": "node watch.config.js",
+        "build": "node build.config.js",
+        "postinstall": "rp init"
+    },
+    "bin": {
+        "rp": "./output/cli/index.cjs"
     },
     "dependencies": {
         "commander": "^10.0.0",
