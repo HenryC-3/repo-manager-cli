@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { Command } from "commander";
 import { existsSync, appendFileSync, mkdirpSync } from "fs-extra";
 import { resolve } from "path";

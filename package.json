@@ -23,6 +23,9 @@
     "scripts": {
         "build": "node esbuild.config.cjs"
     },
+    "bin": {
+        "rp": "./output/cli/index.cjs"
+    },
     "dependencies": {
         "commander": "^10.0.0",
         "fs-extra": "^11.1.0",
