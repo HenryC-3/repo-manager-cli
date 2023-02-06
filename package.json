@@ -1,0 +1,41 @@
+{
+    "name": "repo-manager",
+    "description": "1. auto commit in super project when running `git commit -m msg` in the submodule. 2. stop commit when entering `ROOT_SUPER_PROJECT`",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/HenryC-3/repo-manager-cli.git"
+    },
+    "keywords": [
+        "git",
+        "github",
+        "github-repository",
+        "submodule"
+    ],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/HenryC-3/repo-manager-cli/issues"
+    },
+    "homepage": "https://github.com/HenryC-3/repo-manager-cli#readme",
+    "version": "0.0.1",
+    "type": "module",
+    "main": "output/cli/index.cjs",
+    "author": "HarryHe <henryhe0074@foxmail.com>",
+    "scripts": {
+        "build": "node esbuild.config.cjs"
+    },
+    "dependencies": {
+        "commander": "^10.0.0",
+        "fs-extra": "^11.1.0",
+        "replace-in-file": "^6.3.5",
+        "zx": "^7.1.1"
+    },
+    "devDependencies": {
+        "@types/fs-extra": "^11.0.1",
+        "esbuild": "0.17.5",
+        "eslint": "^8.33.0",
+        "eslint-config-google": "^0.14.0",
+        "eslint-config-prettier": "^8.6.0",
+        "prettier": "^2.8.3",
+        "typescript": "^4.9.5"
+    }
+}

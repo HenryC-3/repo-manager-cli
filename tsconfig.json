@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./src",
+        "paths": {
+            "@cli": ["cli/*"]
+        },
+        "target": "ES2017",
+        "module": "ES2022",
+        "moduleResolution": "nodenext",
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "emitDeclarationOnly": true,
+        "declaration": true
+    }
+}
