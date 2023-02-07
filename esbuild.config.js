@@ -1,6 +1,6 @@
-const esbuild = require('esbuild')
+import * as esbuild from 'esbuild'
 
-esbuild.build({
+let ctx = await esbuild.context({
     entryPoints: ['./src/scripts/index.ts', "./src/cli/index.ts"],
     outdir: "./output",
     outExtension: { '.js': '.cjs' }, // [esbuild - API](https://esbuild.github.io/api/#out-extension)
@@ -10,4 +10,12 @@ esbuild.build({
     sourcemap: true,
     target: 'node18',
     format: "cjs",
-}).catch(() => process.exit(1))
+})
+
+try {
+    await ctx.watch()
+    console.log('watching...')
+} catch (error) {
+    console.log(error)
+}
+

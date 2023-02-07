@@ -1,55 +1,42 @@
 #!/usr/bin/env node
 import { Command } from "commander";
-import { existsSync, appendFileSync, mkdirpSync } from "fs-extra";
-import { resolve } from "path";
-import { getHooksPath, getScriptInHook, initHook } from "./utils.js";
-import { homedir } from "os";
-import { replaceInFileSync } from "replace-in-file";
+import { $ } from "zx";
+import {
+    enableAutoUpdate,
+    disableAutoUpdate,
+    initConfig as initCache,
+} from "./actions.js";
+import { initHook } from "./utils/post-commit.js";
 
+$.verbose = false;
 const program = new Command();
 
 program
-    .name("submodule-manager")
-    .description(
-        "CLI for setting up git hooks and executing shortcuts of git submodule related commands"
-    )
+    .name("rp")
+    .description("CLI for setting up git hooks and organizing git submodules")
     .version("0.0.1");
 
 program
     .command("init")
-    .description("setup post-commit hooks and environment variables")
+    .description("initialize cache files and post-commit hook")
     .action(() => {
-        const newFolderPath = `${homedir()}/.config/global-hooks/hooks`;
-        const postCommitSourcePath = resolve(__dirname, "../../post-commit");
-        getHooksPath().then((hooksPath) => {
-            const isHookExist = existsSync(`${hooksPath}/post-commit`);
-
-            if (isHookExist) {
-                appendFileSync(`${hooksPath}/post-commit`, getScriptInHook());
-            }
-
-            if (!hooksPath) {
-                mkdirpSync(newFolderPath);
-                initHook(newFolderPath, postCommitSourcePath);
-            }
-
-            if (hooksPath && !isHookExist) {
-                initHook(newFolderPath, postCommitSourcePath);
-            }
-        });
+        initCache();
+        initHook();
     });
+
+// program
+//     .command("config")
+//     .option("--edit", "edit config file")
+//     .action(openConfigInEditor);
 
 program
-    .command("remove")
-    .description("remove update submodule operation in post-commit hook")
-    .action(() => {
-        getHooksPath().then((hooksPath) => {
-            replaceInFileSync({
-                files: `${hooksPath}/post-commit`,
-                from: getScriptInHook(),
-                to: "",
-            });
-        });
+    .command("auto-update")
+    .description("disable or enable auto update")
+    .option("--disable", "disable auto update after commit in submodule")
+    .option("--enable", "enable auto update after commit in submodule")
+    .action((options) => {
+        if (options.disable) disableAutoUpdate();
+        if (options.enable) enableAutoUpdate();
     });
 
-program.parse();
+program.parse(process.argv);

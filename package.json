@@ -21,7 +21,8 @@
     "main": "output/cli/index.cjs",
     "author": "HarryHe <henryhe0074@foxmail.com>",
     "scripts": {
-        "build": "node esbuild.config.cjs"
+        "watch": "node esbuild.config.js",
+        "postinstall": ""
     },
     "bin": {
         "rp": "./output/cli/index.cjs"
