@@ -1,6 +1,6 @@
 import * as esbuild from 'esbuild'
 
-let ctx = await esbuild.context({
+export const ctx = await esbuild.context({
     entryPoints: ['./src/scripts/index.ts', "./src/cli/index.ts"],
     outdir: "./output",
     outExtension: { '.js': '.cjs' }, // [esbuild - API](https://esbuild.github.io/api/#out-extension)
@@ -12,10 +12,5 @@ let ctx = await esbuild.context({
     format: "cjs",
 })
 
-try {
-    await ctx.watch()
-    console.log('watching...')
-} catch (error) {
-    console.log(error)
-}
+
 

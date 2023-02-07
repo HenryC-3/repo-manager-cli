@@ -2,6 +2,7 @@ import { $, chalk } from "zx";
 import { cleanGitEnvs, updateLinkWrapper } from "./utils.js";
 import { getStr } from "../utils/index.js";
 
+$.verbose = false;
 cleanGitEnvs();
 
 $`pwd`
