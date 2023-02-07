@@ -68,7 +68,7 @@ export function getScriptInHook() {
     return `\nnode ${scriptPath}`;
 }
 
-export async function removeScriptToHook() {
+export async function removeScriptInHook() {
     const hooksPath = await getHooksPath();
     await replaceInFile({
         files: `${hooksPath}/post-commit`,

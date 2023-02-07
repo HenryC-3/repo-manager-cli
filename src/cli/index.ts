@@ -1,11 +1,7 @@
 #!/usr/bin/env node
 import { Command } from "commander";
 import { $ } from "zx";
-import {
-    enableAutoUpdate,
-    disableAutoUpdate,
-    initConfig as initCache,
-} from "./actions.js";
+import { enableAutoUpdate, disableAutoUpdate, initCache } from "./actions.js";
 import { initHook } from "./utils/post-commit.js";
 
 $.verbose = false;
