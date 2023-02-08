@@ -20,10 +20,18 @@ export const defaultConfig: Config = {
 export async function getConfigValue(key: keyof Config) {
     try {
         const result = await getConfig();
-        return result[key];
+        if (result[key] !== undefined || result[key] !== "") {
+            return result[key];
+        }
+        throw Error;
     } catch (error) {
-        console.log(error);
-        console.log(chalk.red(`${key} is not configured in ${configFilePath}`));
+        console.log(
+            chalk.red(`In order to use this command, please configure`),
+            chalk.green(`${key}`),
+            chalk.red("in"),
+            chalk.green(`${configFilePath}`),
+            chalk.red("first.")
+        );
     }
 }
 

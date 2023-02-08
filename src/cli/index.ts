@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 import { Command } from "commander";
 import { $ } from "zx";
-import { enableAutoUpdate, disableAutoUpdate, initConfig } from "./actions.js";
+import {
+    enableAutoUpdate,
+    disableAutoUpdate,
+    initConfig,
+    addRepoToSuperProject,
+} from "./actions.js";
 import { initHook } from "./utils/post-commit.js";
 
 $.verbose = false;
@@ -34,5 +39,11 @@ program
         if (options.disable) disableAutoUpdate();
         if (options.enable) enableAutoUpdate();
     });
+
+program
+    .command("module")
+    .description("perform module operation")
+    .option("--add", "add current repository to super-project") // `rp module --add` 添加当前路径下的 repository 到 super-project
+    .action(addRepoToSuperProject);
 
 program.parse(process.argv);

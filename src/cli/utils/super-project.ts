@@ -1,5 +1,7 @@
 import { lstat, readdir } from "fs-extra";
 import { join } from "path";
+import { $ } from "zx";
+import { getConfigValue } from "./config.js";
 
 export async function getSubFolders(targetPath: string) {
     const dirs = [];
@@ -13,4 +15,23 @@ export async function getSubFolders(targetPath: string) {
         }
     }
     return dirs;
+}
+
+/**
+ * @description add, commit, push changes in super-project
+ * @param isSubmodule is this file a submodule?
+ */
+export async function updateSuperProject(
+    changedFilePath: string[],
+    msg: string,
+    isSubmodule = false
+) {
+    const superProjectPath = await getConfigValue("superProjectPath");
+    // git add
+    await $`git -C ${superProjectPath} add ${changedFilePath}`;
+    if (isSubmodule) await $`git -C ${superProjectPath} add .gitmodules`;
+    // git commit
+    await $`git commit -m ${msg}`;
+    // git push
+    await $`git push origin master`;
 }
