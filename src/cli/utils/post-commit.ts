@@ -12,7 +12,7 @@ import { replaceInFile } from "replace-in-file";
 export async function initHook() {
     const hooksPath = await getHooksPath();
     const isHookExist = await exists(`${hooksPath}/post-commit`);
-    const status = getConfigValue("autoUpdate");
+    const status = await getConfigValue("autoUpdate");
     const scriptWithSheBang = `#!/bin/sh \n${getScriptInHook()}`;
 
     // hooks path configured and post-commit hook exist
@@ -24,11 +24,12 @@ export async function initHook() {
         // add script to hook when
         // 1. autoUpdate in config.json is true
         // 2. there's no existing scripts in post-commit hook
-        if (status && !isHookContainsScript) addScriptToHook();
+        if (status && !isHookContainsScript) {
+            await addScriptToHook();
+        }
         console.log(
-            chalk.blue(
-                `post-commit hook initialized, available at ${hooksPath}/post-commit`
-            )
+            chalk.blue(`post-commit hook initialized, available at`),
+            chalk.green(`${hooksPath}/post-commit`)
         );
         return;
     }

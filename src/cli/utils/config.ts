@@ -1,4 +1,4 @@
-import { writeJson } from "fs-extra";
+import { readJson, writeJson } from "fs-extra";
 import { chalk } from "zx";
 import { homedir } from "os";
 import { name } from "../../../package.json";
@@ -17,9 +17,10 @@ export const defaultConfig: Config = {
     superProjectPath: "",
 };
 
-export function getConfigValue(key: keyof Config) {
+export async function getConfigValue(key: keyof Config) {
     try {
-        return getConfig()[key];
+        const result = await getConfig();
+        return result[key];
     } catch (error) {
         console.log(error);
         console.log(chalk.red(`${key} is not configured in ${configFilePath}`));
@@ -32,6 +33,6 @@ export async function updateConfig(config: Partial<Config>) {
     await writeJson(configFilePath, newConfig);
 }
 
-export function getConfig(): Config {
-    return require(configFilePath);
+export async function getConfig(): Promise<Config> {
+    return await readJson(configFilePath);
 }

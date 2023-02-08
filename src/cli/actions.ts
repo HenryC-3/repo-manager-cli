@@ -6,7 +6,7 @@ import { chalk } from "zx";
 import { $ } from "zx";
 
 export async function disableAutoUpdate() {
-    const status = getConfigValue("autoUpdate");
+    const status = await getConfigValue("autoUpdate");
     if (!status) {
         console.log(chalk.blue("already disabled"));
         return;
@@ -16,7 +16,7 @@ export async function disableAutoUpdate() {
 }
 
 export async function enableAutoUpdate() {
-    const status = getConfigValue("autoUpdate");
+    const status = await getConfigValue("autoUpdate");
     if (status) {
         console.log(chalk.blue("already enabled"));
         return;
@@ -32,13 +32,16 @@ export async function initConfig() {
     const isConfigExist = await pathExists(configPath);
 
     if (isConfigExist) {
-        remove(configPath);
-        removeScriptInHook();
+        await removeScriptInHook();
     }
 
     await mkdirp(configPath);
     await createFile(configFilePath);
     await writeJson(configFilePath, defaultConfig);
+    console.log(
+        chalk.blue(`configuration initialized, available at`),
+        chalk.green(configFilePath)
+    );
 }
 
 export async function openConfigInEditor() {

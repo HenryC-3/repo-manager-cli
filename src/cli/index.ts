@@ -15,9 +15,9 @@ program
 program
     .command("init")
     .description("initialize cache files and post-commit hook")
-    .action(() => {
-        initConfig();
-        initHook();
+    .action(async () => {
+        await initConfig();
+        await initHook();
     });
 
 // program
