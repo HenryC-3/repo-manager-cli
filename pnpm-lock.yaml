@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@commander-js/extra-typings': ^10.0.2
   '@types/fs-extra': ^11.0.1
   '@types/inquirer': ^9.0.3
   commander: ^10.0.0
@@ -23,6 +24,7 @@ dependencies:
   zx: 7.1.1
 
 devDependencies:
+  '@commander-js/extra-typings': 10.0.2_commander@10.0.0
   '@types/fs-extra': 11.0.1
   '@types/inquirer': 9.0.3
   esbuild: 0.17.5
@@ -33,6 +35,14 @@ devDependencies:
   typescript: 4.9.5
 
 packages:
+
+  /@commander-js/extra-typings/10.0.2_commander@10.0.0:
+    resolution: {integrity: sha512-PSGG74fpbc2/WRInbKJbwKiUwdN9YqZSgHxDGMqInUe4G6DTLp90ww12uHMC1U/219qPWI0fLSSjwVDUTdnqIQ==}
+    peerDependencies:
+      commander: 10.0.x
+    dependencies:
+      commander: 10.0.0
+    dev: true
 
   /@esbuild/android-arm/0.17.5:
     resolution: {integrity: sha512-crmPUzgCmF+qZXfl1YkiFoUta2XAfixR1tEnr/gXIixE+WL8Z0BGqfydP5oox0EUOgQMMRgtATtakyAcClQVqQ==}
@@ -487,7 +497,6 @@ packages:
   /commander/10.0.0:
     resolution: {integrity: sha512-zS5PnTI22FIRM6ylNW8G4Ap0IEOyk62fhLSD0+uHRT9McRCLGpkVNvao4bjimpK/GShynyQkFFxHhwMcETmduA==}
     engines: {node: '>=14'}
-    dev: false
 
   /concat-map/0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
