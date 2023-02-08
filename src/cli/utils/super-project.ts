@@ -22,13 +22,15 @@ export async function getSubFolders(targetPath: string) {
  * @param isSubmodule is this file a submodule?
  */
 export async function updateSuperProject(
-    changedFilePath: string[],
+    changedFilesPath: string[],
     msg: string,
     isSubmodule = false
 ) {
     const superProjectPath = await getConfigValue("superProjectPath");
     // git add
-    await $`git -C ${superProjectPath} add ${changedFilePath}`;
+    for (const path of changedFilesPath) {
+        await $`git -C ${superProjectPath} add ${path}`;
+    }
     if (isSubmodule) await $`git -C ${superProjectPath} add .gitmodules`;
     // git commit
     await $`git commit -m ${msg}`;

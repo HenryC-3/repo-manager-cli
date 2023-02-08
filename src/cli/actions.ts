@@ -107,7 +107,7 @@ export async function addRepoToSuperProject() {
 
     // update changes in super-project
     await updateSuperProject(
-        `${category}/${moduleName}`,
+        [`${category}/${moduleName}`],
         `add module ${moduleName}`,
         true
     );
