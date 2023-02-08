@@ -1,20 +1,12 @@
-import { getCacheValue } from "./utils/cache.js";
+import { configFilePath, configPath, defaultConfig } from "./utils/config.js";
+import { getConfigValue } from "./utils/config.js";
 import { addScriptToHook, removeScriptInHook } from "./utils/post-commit.js";
 import { mkdirp, createFile, writeJson, pathExists, remove } from "fs-extra";
 import { chalk } from "zx";
-import { homedir } from "os";
-import { name } from "../../package.json";
 import { $ } from "zx";
 
-export const configPath = `${homedir()}/.config/${name}`;
-export const cacheFilePath = `${homedir()}/.config/${name}/cache.json`;
-export interface Cache {
-    autoUpdate: boolean;
-    globalHooksPath: string;
-}
-
 export async function disableAutoUpdate() {
-    const status = getCacheValue("autoUpdate");
+    const status = getConfigValue("autoUpdate");
     if (!status) {
         console.log(chalk.blue("already disabled"));
         return;
@@ -24,7 +16,7 @@ export async function disableAutoUpdate() {
 }
 
 export async function enableAutoUpdate() {
-    const status = getCacheValue("autoUpdate");
+    const status = getConfigValue("autoUpdate");
     if (status) {
         console.log(chalk.blue("already enabled"));
         return;
@@ -34,14 +26,10 @@ export async function enableAutoUpdate() {
 }
 
 /**
- * @description create config file at ~/.config/repo-steward/cache.json
+ * @description create config file at ~/.config/repo-steward/config.json
  */
-export async function initCache() {
+export async function initConfig() {
     const isConfigExist = await pathExists(configPath);
-    const content: Cache = {
-        autoUpdate: false,
-        globalHooksPath: "",
-    };
 
     if (isConfigExist) {
         remove(configPath);
@@ -49,11 +37,11 @@ export async function initCache() {
     }
 
     await mkdirp(configPath);
-    await createFile(cacheFilePath);
-    await writeJson(cacheFilePath, content);
+    await createFile(configFilePath);
+    await writeJson(configFilePath, defaultConfig);
 }
 
 export async function openConfigInEditor() {
     const editor = $.env.EDITOR;
-    await $`${editor} ${cacheFilePath}`;
+    await $`${editor} ${configFilePath}`;
 }

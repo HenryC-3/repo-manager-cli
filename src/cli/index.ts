@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { Command } from "commander";
 import { $ } from "zx";
-import { enableAutoUpdate, disableAutoUpdate, initCache } from "./actions.js";
+import { enableAutoUpdate, disableAutoUpdate, initConfig } from "./actions.js";
 import { initHook } from "./utils/post-commit.js";
 
 $.verbose = false;
@@ -16,7 +16,7 @@ program
     .command("init")
     .description("initialize cache files and post-commit hook")
     .action(() => {
-        initCache();
+        initConfig();
         initHook();
     });
 

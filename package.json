@@ -31,11 +31,13 @@
     "dependencies": {
         "commander": "^10.0.0",
         "fs-extra": "^11.1.0",
+        "inquirer": "^9.1.4",
         "replace-in-file": "^6.3.5",
         "zx": "^7.1.1"
     },
     "devDependencies": {
         "@types/fs-extra": "^11.0.1",
+        "@types/inquirer": "^9.0.3",
         "esbuild": "0.17.5",
         "eslint": "^8.33.0",
         "eslint-config-google": "^0.14.0",

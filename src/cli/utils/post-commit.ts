@@ -1,9 +1,9 @@
 import { appendFile, createFile, exists, mkdirp, writeFile } from "fs-extra";
 import { $, chalk } from "zx";
 import { resolve } from "path";
-import { getStr } from "../../utils/index.js";
+import { checkIfContains, getStr } from "../../utils/index.js";
 import { homedir } from "os";
-import { getCacheValue, updateCache } from "./cache.js";
+import { getConfigValue, updateConfig } from "./config.js";
 import { replaceInFile } from "replace-in-file";
 
 /**
@@ -12,12 +12,19 @@ import { replaceInFile } from "replace-in-file";
 export async function initHook() {
     const hooksPath = await getHooksPath();
     const isHookExist = await exists(`${hooksPath}/post-commit`);
-    const status = getCacheValue("autoUpdate");
+    const status = getConfigValue("autoUpdate");
     const scriptWithSheBang = `#!/bin/sh \n${getScriptInHook()}`;
 
     // hooks path configured and post-commit hook exist
     if (isHookExist) {
-        if (!status) addScriptToHook();
+        const isHookContainsScript = await checkIfContains(
+            `${hooksPath}/post-commit`,
+            getScriptInHook()
+        );
+        // add script to hook when
+        // 1. autoUpdate in config.json is true
+        // 2. there's no existing scripts in post-commit hook
+        if (status && !isHookContainsScript) addScriptToHook();
         console.log(
             chalk.blue(
                 `post-commit hook initialized, available at ${hooksPath}/post-commit`
@@ -75,7 +82,7 @@ export async function removeScriptInHook() {
         from: getScriptInHook(),
         to: "",
     });
-    updateCache({ autoUpdate: false });
+    updateConfig({ autoUpdate: false });
 }
 
 export async function addScriptToHook() {
@@ -84,6 +91,6 @@ export async function addScriptToHook() {
 
     if (isHookExist) {
         await appendFile(`${hooksPath}/post-commit`, getScriptInHook());
-        updateCache({ autoUpdate: true });
+        updateConfig({ autoUpdate: true });
     }
 }
