@@ -2,13 +2,13 @@
 
 ## Table of Content
 
--   [Table of Content](#table-of-content)
--   [Overview](#overview)
--   [Installation](#installation)
--   [Usage](#usage)
--   [Uninstall](#uninstall)
--   [Setup Script Only](#setup-script-only)
--   [Development](#development)
+- [Table of Content](#table-of-content)
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Uninstall](#uninstall)
+- [Setup Script Only](#setup-script-only)
+- [Development](#development)
 
 ## Overview
 
@@ -28,6 +28,7 @@ If you want to use the script without CLI, you can follow the [setup-script-only
 
 ```bash
 npm install -g repo-steward
+rp init
 ```
 
 This step installs the `rp` command, and sets up script in `post-commit` hook.
@@ -35,23 +36,15 @@ This step installs the `rp` command, and sets up script in `post-commit` hook.
 ## Usage
 
 ```bash
-Usage: rp [options] [command]
-
-Options:
-  -V, --version          output the version number
-  -h, --help             display help for command
-
-Commands:
-  init                   initialize cache files and post-commit hook
-  auto-update [options]  disable or enable auto update
-  help [command]         display help for command
+rp --help
+rp help <command>
 ```
 
 ## Uninstall
 
 ```bash
 rp auto-update --disable
-npm uninstall repo-steward
+npm uninstall -g repo-steward
 ```
 
 ## Setup Script Only
