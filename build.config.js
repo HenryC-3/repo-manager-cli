@@ -9,7 +9,6 @@ export const ctx = await esbuild.context(await getConfig())
 const result = await esbuild.build(await getConfig())
 // create meta.json for bundle analysis  [esbuild - Bundle Size Analyzer](https://esbuild.github.io/analyze/)
 await writeFile('meta.json', JSON.stringify(result.metafile))
-process.exit()
 
 async function getConfig() {
     const env = process.env.NODE_ENV
