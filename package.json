@@ -23,9 +23,7 @@
     "scripts": {
         "watch": "node ./config/watch.config.js",
         "build": "node ./config/build.config.js",
-        "prepublishOnly": "NODE_ENV=production node ./config/build.config.js",
-        "postinstall": "node ./output/cli/index.cjs init",
-        "preuninstall": "rp auto-update --disable"
+        "prepublishOnly": "NODE_ENV=production node ./config/build.config.js"
     },
     "bin": {
         "rp": "./output/cli/index.cjs"
