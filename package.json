@@ -21,9 +21,9 @@
     "main": "output/cli/index.cjs",
     "author": "HarryHe <henryhe0074@foxmail.com>",
     "scripts": {
-        "watch": "node watch.config.js",
-        "build": "node build.config.js",
-        "prepublishOnly": "NODE_ENV=production node build.config.js",
+        "watch": "node ./config/watch.config.js",
+        "build": "node ./config/build.config.js",
+        "prepublishOnly": "NODE_ENV=production node ./config/build.config.js",
         "postinstall": "node ./output/cli/index.cjs init",
         "preuninstall": "rp auto-update --disable"
     },
