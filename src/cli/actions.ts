@@ -33,10 +33,10 @@ export async function enableAutoUpdate() {
  * @description create config file at ~/.config/repo-steward/config.json
  */
 export async function initConfig() {
-    const isConfigExist = await pathExists(configPath);
+    const isConfigFileExist = await pathExists(configFilePath);
 
-    if (isConfigExist) {
-        await removeScriptInHook();
+    if (isConfigFileExist) {
+        await remove(configPath);
     }
 
     await mkdirp(configPath);
