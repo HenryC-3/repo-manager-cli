@@ -16,14 +16,15 @@
         "url": "https://github.com/HenryC-3/repo-manager-cli/issues"
     },
     "homepage": "https://github.com/HenryC-3/repo-manager-cli#readme",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "type": "module",
     "main": "output/cli/index.cjs",
     "author": "HarryHe <henryhe0074@foxmail.com>",
     "scripts": {
         "watch": "node watch.config.js",
         "build": "node build.config.js",
-        "postinstall": "rp init"
+        "postinstall": "rp init",
+        "prepublishOnly": "NODE_ENV=production node build.config.js"
     },
     "bin": {
         "rp": "./output/cli/index.cjs"
