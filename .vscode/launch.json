@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug rp auto-update --disable",
+            "skipFiles": ["<node_internals>/**"],
+            // program to run in debugging process
+            "program": "${workspaceFolder}/output/cli/index.cjs",
+            "args": ["auto-update", "--disable"],
+            // match all genreated cjs files
+            "outFiles": ["${workspaceFolder}/**/*.cjs"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug rp auto-update --enable",
+            "skipFiles": ["<node_internals>/**"],
+            "program": "${workspaceFolder}/output/cli/index.cjs",
+            "args": ["auto-update", "--enable"],
+            "outFiles": ["${workspaceFolder}/**/*.cjs"]
+        }
+    ]
+}
