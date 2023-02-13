@@ -8,8 +8,8 @@ export const configPath = `${homedir()}/.config/${name}`;
 export const configFilePath = `${homedir()}/.config/${name}/config.json`;
 
 export interface Config {
-    autoUpdate: boolean;
-    superProjectPath: string;
+    autoUpdate: boolean; // the auto-update git super-project script status. false: disabled, true: enabled
+    superProjectPath: string; // the path to the git super-project which stores the structure of github repositories
     // rootSuperProject: string
 }
 
