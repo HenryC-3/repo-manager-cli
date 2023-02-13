@@ -1,22 +1,36 @@
 /* utils for config.json file */
-import { readJson, writeJson } from "fs-extra";
+import { exists, readJson, writeJson } from "fs-extra";
 import { chalk } from "zx";
 import { homedir } from "os";
 import { name } from "../../../package.json";
+import { getHooksPath, getScriptInHook } from "./post-commit.js";
+import { checkIfContains } from "../../utils/index.js";
 
 export const configPath = `${homedir()}/.config/${name}`;
 export const configFilePath = `${homedir()}/.config/${name}/config.json`;
 
 export interface Config {
-    autoUpdate: boolean; // the auto-update git super-project script status. false: disabled, true: enabled
     superProjectPath: string; // the path to the git super-project which stores the structure of github repositories
     // rootSuperProject: string
 }
 
 export const defaultConfig: Config = {
-    autoUpdate: true,
     superProjectPath: "",
 };
+
+export async function getScriptStatus() {
+    const hooksPath = await getHooksPath();
+    const isHookExist = await exists(`${hooksPath}/post-commit`);
+    if (isHookExist) {
+        const isHookContainsScript = await checkIfContains(
+            `${hooksPath}/post-commit`,
+            getScriptInHook()
+        );
+        return isHookContainsScript;
+    } else {
+        throw "post-commit hook doesn't exit, run `rp init` to initialize post-commit file";
+    }
+}
 
 export async function getConfigValue(key: keyof Config) {
     try {

@@ -1,7 +1,12 @@
 import { getRemoteURL, haveChange } from "./utils/repo.js";
 import inquirer from "inquirer";
 import { getSubFolders, updateSuperProject } from "./utils/super-project.js";
-import { configFilePath, configPath, defaultConfig } from "./utils/config.js";
+import {
+    getScriptStatus,
+    configFilePath,
+    configPath,
+    defaultConfig,
+} from "./utils/config.js";
 import { getConfigValue } from "./utils/config.js";
 import { addScriptToHook, removeScriptInHook } from "./utils/post-commit.js";
 import { mkdirp, createFile, writeJson, pathExists, remove } from "fs-extra";
@@ -10,8 +15,8 @@ import { basename } from "path";
 import { addSubmodule } from "./utils/submodule.js";
 
 export async function disableAutoUpdate() {
-    const status = await getConfigValue("autoUpdate");
-    if (!status) {
+    const isScriptExist = await getScriptStatus();
+    if (!isScriptExist) {
         console.log(chalk.blue("already disabled"));
         return;
     }
@@ -20,8 +25,8 @@ export async function disableAutoUpdate() {
 }
 
 export async function enableAutoUpdate() {
-    const status = await getConfigValue("autoUpdate");
-    if (status) {
+    const isScriptExist = await getScriptStatus();
+    if (isScriptExist) {
         console.log(chalk.blue("already enabled"));
         return;
     }
