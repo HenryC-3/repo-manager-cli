@@ -9,7 +9,13 @@ import {
 } from "./utils/config.js";
 import { getConfigValue } from "./utils/config.js";
 import { addScriptToHook, removeScriptInHook } from "./utils/post-commit.js";
-import { mkdirp, createFile, writeJson, pathExists, remove } from "fs-extra";
+import {
+    mkdirp,
+    createFile,
+    writeJson,
+    pathExists,
+    remove,
+} from "fs-extra/esm";
 import { $, chalk } from "zx";
 import { basename } from "path";
 import { addSubmodule } from "./utils/submodule.js";

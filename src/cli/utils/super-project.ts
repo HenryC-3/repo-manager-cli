@@ -1,5 +1,5 @@
 /* utils for git super-project */
-import { lstat, readdir } from "fs-extra";
+import { lstat, readdir } from "fs/promises";
 import { join } from "path";
 import { $ } from "zx";
 import { getConfigValue } from "./config.js";

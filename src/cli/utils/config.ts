@@ -1,5 +1,5 @@
 /* utils for config.json file */
-import { exists, readJson, writeJson } from "fs-extra";
+import { pathExists, readJson, writeJson } from "fs-extra/esm";
 import { chalk } from "zx";
 import { homedir } from "os";
 import { name } from "../../../package.json";
@@ -20,7 +20,7 @@ export const defaultConfig: Config = {
 
 export async function getScriptStatus() {
     const hooksPath = await getHooksPath();
-    const isHookExist = await exists(`${hooksPath}/post-commit`);
+    const isHookExist = await pathExists(`${hooksPath}/post-commit`);
     if (isHookExist) {
         const isHookContainsScript = await checkIfContains(
             `${hooksPath}/post-commit`,

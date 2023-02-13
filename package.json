@@ -21,12 +21,12 @@
     "main": "output/cli/index.cjs",
     "author": "HarryHe <henryhe0074@foxmail.com>",
     "scripts": {
-        "watch": "node ./config/watch.config.js",
-        "build": "node ./config/build.config.js",
-        "prepublishOnly": "NODE_ENV=production node ./config/build.config.js"
+        "build": "tsup",
+        "watch": "tsup --watch --sourcemap inline",
+        "prepublishOnly": "tsup"
     },
     "bin": {
-        "rp": "./output/cli/index.cjs"
+        "rp": "./dist/cli/index.js"
     },
     "dependencies": {
         "commander": "^10.0.0",

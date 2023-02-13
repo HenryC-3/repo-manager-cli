@@ -1,18 +1,19 @@
 /* utils for post-commit file */
-import { appendFile, createFile, exists, mkdirp, writeFile } from "fs-extra";
+import { createFile, pathExists, mkdirp } from "fs-extra/esm";
+import { appendFile, writeFile } from "fs/promises";
 import { $, chalk } from "zx";
 import { resolve } from "path";
-import { getStr } from "../../utils/index.js";
+import { __dirname, getStr } from "../../utils/index.js";
 import { homedir } from "os";
 import { getScriptStatus, updateConfig } from "./config.js";
-import { replaceInFile } from "replace-in-file";
+import replaceInFile from "replace-in-file";
 
 /**
  * @description create executable post-commit hook in ~/.config/global-hooks/hooks
  */
 export async function initHook() {
     const hooksPath = await getHooksPath();
-    const isHookExist = await exists(`${hooksPath}/post-commit`);
+    const isHookExist = await pathExists(`${hooksPath}/post-commit`);
     const isScriptExist = await getScriptStatus();
     const scriptWithSheBang = `#!/bin/sh \n${getScriptInHook()}`;
 
@@ -67,13 +68,13 @@ export async function getHooksPath() {
 }
 
 export function getScriptInHook() {
-    const scriptPath = resolve(__dirname, "../../output/scripts/index.cjs");
+    const scriptPath = resolve(__dirname(), "../../dist/scripts/index.js");
     return `\nnode ${scriptPath}`;
 }
 
 export async function removeScriptInHook() {
     const hooksPath = await getHooksPath();
-    await replaceInFile({
+    await replaceInFile.replaceInFile({
         files: `${hooksPath}/post-commit`,
         from: getScriptInHook(),
         to: "",
@@ -82,7 +83,7 @@ export async function removeScriptInHook() {
 
 export async function addScriptToHook() {
     const hooksPath = await getHooksPath();
-    const isHookExist = await exists(`${hooksPath}/post-commit`);
+    const isHookExist = await pathExists(`${hooksPath}/post-commit`);
 
     if (isHookExist) {
         await appendFile(`${hooksPath}/post-commit`, getScriptInHook());
