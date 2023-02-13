@@ -1,3 +1,4 @@
+/* utils for config.json file */
 import { readJson, writeJson } from "fs-extra";
 import { chalk } from "zx";
 import { homedir } from "os";

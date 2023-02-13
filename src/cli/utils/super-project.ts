@@ -1,3 +1,4 @@
+/* utils for git super-project */
 import { lstat, readdir } from "fs-extra";
 import { join } from "path";
 import { $ } from "zx";

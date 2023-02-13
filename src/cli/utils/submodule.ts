@@ -1,3 +1,4 @@
+/* utils for git submodules */
 import { $, chalk } from "zx";
 export async function addSubmodule(
     superProjectPath: string,

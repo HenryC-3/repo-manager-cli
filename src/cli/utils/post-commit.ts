@@ -1,3 +1,4 @@
+/* utils for post-commit file */
 import { appendFile, createFile, exists, mkdirp, writeFile } from "fs-extra";
 import { $, chalk } from "zx";
 import { resolve } from "path";
