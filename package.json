@@ -18,12 +18,12 @@
     "homepage": "https://github.com/HenryC-3/repo-manager-cli#readme",
     "version": "0.0.7",
     "type": "module",
-    "main": "output/cli/index.cjs",
+    "main": "dist/cli/index.js",
     "author": "HarryHe <henryhe0074@foxmail.com>",
     "scripts": {
-        "build": "tsup",
+        "build": "tsup --minify",
         "watch": "tsup --watch --sourcemap inline",
-        "prepublishOnly": "tsup"
+        "prepublishOnly": "tsup --minify"
     },
     "bin": {
         "rp": "./dist/cli/index.js"
