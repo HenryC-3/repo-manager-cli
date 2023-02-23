@@ -39,6 +39,7 @@
         "@commander-js/extra-typings": "^10.0.2",
         "@types/fs-extra": "^11.0.1",
         "@types/inquirer": "^9.0.3",
+        "@types/node": "^18.13.0",
         "esbuild": "0.17.5",
         "eslint": "^8.33.0",
         "eslint-config-google": "^0.14.0",
