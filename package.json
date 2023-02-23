@@ -16,7 +16,7 @@
         "url": "https://github.com/HenryC-3/repo-manager-cli/issues"
     },
     "homepage": "https://github.com/HenryC-3/repo-manager-cli#readme",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "type": "module",
     "main": "dist/cli/index.js",
     "author": "HarryHe <henryhe0074@foxmail.com>",
