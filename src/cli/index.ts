@@ -8,6 +8,7 @@ import {
     addRepoToSuperProject,
 } from "./actions.js";
 import { initHook } from "./utils/post-commit.js";
+import { version } from "../../package.json";
 
 $.verbose = false;
 const program = new Command();
@@ -15,7 +16,7 @@ const program = new Command();
 program
     .name("rp")
     .description("CLI for setting up git hooks and organizing git submodules")
-    .version("0.0.1");
+    .version(version);
 
 program
     .command("init")
