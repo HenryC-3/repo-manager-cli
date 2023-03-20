@@ -2,13 +2,13 @@
 
 ## Table of Content
 
-- [Table of Content](#table-of-content)
-- [Overview](#overview)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Uninstall](#uninstall)
-- [Setup Script Only](#setup-script-only)
-- [Development](#development)
+-   [Table of Content](#table-of-content)
+-   [Overview](#overview)
+-   [Installation](#installation)
+-   [Usage](#usage)
+-   [Uninstall](#uninstall)
+-   [Setup Script Only](#setup-script-only)
+-   [Development](#development)
 
 ## Overview
 
@@ -49,7 +49,7 @@ npm uninstall -g repo-steward
 
 ## Setup Script Only
 
-1.  Download [auto-update script](https://github.com/HenryC-3/repo-manager-cli/releases/download/0.0.1/auto-update-script)
+1.  Download [auto-update script](https://github.com/HenryC-3/repo-manager-cli/releases)
 2.  Run `chmod +x` for this script
 3.  Add the path to the script in your global `post-commit` file. For how to setup git hooks globally, checkout [this answer](https://stackoverflow.com/a/37293198/10915537).
 
