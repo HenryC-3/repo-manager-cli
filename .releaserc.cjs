@@ -9,7 +9,8 @@ module.exports = {
                     { type: "docs", release: "patch" },
                     { type: "refactor", release: "patch" },
                     { type: "style", release: "patch" },
-                    { type: "chore", release: "patch" },
+                    // { type: "chore", release: "patch" },
+                    // { type: "ci", release: "patch" },
                     { type: "build", release: "minor" },
                 ],
                 parserOpts: {
@@ -18,7 +19,12 @@ module.exports = {
             },
         ],
         "@semantic-release/release-notes-generator",
-        "@semantic-release/github",
+        [
+            "@semantic-release/github",
+            {
+                assets: { path: "dist-script/auto-update.js" },
+            },
+        ],
         "@semantic-release/npm",
         [
             "@semantic-release/git",

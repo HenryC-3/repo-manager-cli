@@ -22,6 +22,7 @@
     "author": "HarryHe <henryhe0074@foxmail.com>",
     "scripts": {
         "build": "tsup --minify",
+        "build:script": "tsup --config ./script.build.js",
         "watch": "tsup --watch --sourcemap inline",
         "prepublishOnly": "tsup --minify"
     },
